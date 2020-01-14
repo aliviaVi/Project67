@@ -14,6 +14,10 @@ public class PostEntity {
     private String title;
     private String body;
     private Date date;
+
     @ManyToOne(targetEntity = AuthorEntity.class)
     private AuthorEntity authorEntity;
+
+    @Lob
+    private Byte[] image;
 }
