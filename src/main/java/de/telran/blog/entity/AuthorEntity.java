@@ -2,22 +2,23 @@ package de.telran.blog.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Table(name="author")
 @Entity
-
+@Data
 public class AuthorEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String firstName;
-    private String lastName;
 
-    @OneToMany(targetEntity = PostEntity.class)
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorEntity")
     private Set<PostEntity> postEntities;
 }
